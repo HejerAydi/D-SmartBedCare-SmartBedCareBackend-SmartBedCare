@@ -22,6 +22,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ITestServices, testservices>();
+builder.Services.AddScoped<IUtilisateurServices, UtilisateurServices>();
 builder.Services.AddAutoMapper(cfg =>
 {
     cfg.AddProfile<MappingProfiles>();

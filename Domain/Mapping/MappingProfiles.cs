@@ -1,13 +1,5 @@
-﻿using Domain.DTOs;
-using System;
-using AutoMapper;
-
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using AutoMapper;
+using Domain.DTOs;
 using Domain.Entities;
 
 namespace Domain.Mapping
@@ -17,8 +9,15 @@ namespace Domain.Mapping
         public MappingProfiles()
         {
             CreateMap<TestDTO, Test>().ReverseMap();
-        
 
+            // Utilisateur mappings
+            CreateMap<Utilisateur, UtilisateurDTO>().ReverseMap();
+            CreateMap<CreateUtilisateurDTO, Utilisateur>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ForMember(dest => dest.DateCreation, opt => opt.Ignore())
+                .ForMember(dest => dest.IsActive, opt => opt.Ignore());
+            CreateMap<UpdateUtilisateurDTO, Utilisateur>()
+                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
         }
     }
 
