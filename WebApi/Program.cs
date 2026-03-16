@@ -76,6 +76,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ITestServices, testservices>();
 builder.Services.AddScoped<IUtilisateurServices, UtilisateurServices>();
 builder.Services.AddScoped<IAuthServices, AuthServices>();
+builder.Services.AddScoped<IClientServices, ClientServices>();
 builder.Services.AddAutoMapper(cfg => cfg.AddProfile<MappingProfiles>());
 
 var app = builder.Build();

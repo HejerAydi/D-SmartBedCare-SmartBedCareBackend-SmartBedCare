@@ -16,6 +16,7 @@ namespace Infrastructure.Data
         }
         public virtual DbSet<Test> test { get; set; }
         public virtual DbSet<Utilisateur> Utilisateurs { get; set; }
+        public virtual DbSet<Client> Clients { get; set; }
 
     }
 }
