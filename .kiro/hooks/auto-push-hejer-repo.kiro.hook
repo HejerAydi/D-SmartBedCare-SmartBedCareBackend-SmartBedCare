@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Auto Push to HejerAydi Repo",
+  "description": "Automatically commits and pushes all changes to HejerAydi's GitHub repo after each agent session",
+  "version": "1",
+  "when": {
+    "type": "agentStop"
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "git add . && git commit -m \"auto: sync changes\" --allow-empty && git push newrepo master"
+  }
+}
