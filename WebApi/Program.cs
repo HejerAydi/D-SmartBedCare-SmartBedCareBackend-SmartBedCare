@@ -77,6 +77,11 @@ builder.Services.AddScoped<ITestServices, testservices>();
 builder.Services.AddScoped<IUtilisateurServices, UtilisateurServices>();
 builder.Services.AddScoped<IAuthServices, AuthServices>();
 builder.Services.AddScoped<IClientServices, ClientServices>();
+builder.Services.AddScoped<ILitMedicalServices, LitMedicalServices>();
+builder.Services.AddScoped<ILocationServices, LocationServices>();
+builder.Services.AddScoped<IPaiementServices, PaiementServices>();
+builder.Services.AddScoped<INotificationServices, NotificationServices>();
+builder.Services.AddScoped<IHistoriqueServices, HistoriqueServices>();
 builder.Services.AddAutoMapper(cfg => cfg.AddProfile<MappingProfiles>());
 
 var app = builder.Build();
