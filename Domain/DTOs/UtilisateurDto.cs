@@ -2,6 +2,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Domain.DTOs
 {
+    public static class UtilisateurRoles
+    {
+        public const string Admin = "Admin";
+        public const string AdminGenerale = "AdminGenerale";
+
+        public static readonly string[] AllRoles = { Admin, AdminGenerale };
+    }
+
     public class UtilisateurDTO
     {
         public int? Id { get; set; }
@@ -22,7 +30,7 @@ namespace Domain.DTOs
         [MaxLength(255)]
         public string? Password { get; set; }
 
-        public string Role { get; set; } = "Admin";
+        public string Role { get; set; } = UtilisateurRoles.Admin;
 
         public bool IsActive { get; set; } = true;
 
@@ -48,7 +56,8 @@ namespace Domain.DTOs
         [MinLength(6, ErrorMessage = "Le mot de passe doit contenir au moins 6 caractères")]
         public string Password { get; set; } = string.Empty;
 
-        public string Role { get; set; } = "Admin";
+        [RegularExpression("^(Admin|AdminGenerale)$", ErrorMessage = "Le rôle doit être 'Admin' ou 'AdminGenerale'")]
+        public string Role { get; set; } = UtilisateurRoles.Admin;
     }
 
     public class UpdateUtilisateurDTO
@@ -63,6 +72,7 @@ namespace Domain.DTOs
         [MaxLength(100)]
         public string? Email { get; set; }
 
+        [RegularExpression("^(Admin|AdminGenerale)$", ErrorMessage = "Le rôle doit être 'Admin' ou 'AdminGenerale'")]
         public string? Role { get; set; }
 
         public bool? IsActive { get; set; }

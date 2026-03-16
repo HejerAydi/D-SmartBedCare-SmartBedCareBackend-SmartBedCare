@@ -58,6 +58,14 @@ namespace ApplicationCore.Services
                 if (existing != null)
                     throw new Exception("Erreur : Un utilisateur avec cet email existe déjà.");
 
+                // Un seul AdminGenerale autorisé
+                if (entity.Role == "AdminGenerale")
+                {
+                    var adminsGenerale = await _unitOfWork.Repository<Utilisateur>().GetAllAsyncwithfilter(u => u.Role == "AdminGenerale");
+                    if (adminsGenerale.Any())
+                        throw new Exception("Erreur : Un AdminGenerale existe déjà. Un seul AdminGenerale est autorisé.");
+                }
+
                 // Hasher le mot de passe
                 entity.Password = BCrypt.Net.BCrypt.HashPassword(entity.Password);
                 entity.DateCreation = DateTime.Now;
@@ -85,6 +93,14 @@ namespace ApplicationCore.Services
                     var emailExists = await _unitOfWork.Repository<Utilisateur>().GetAsync(u => u.Email == entity.Email);
                     if (emailExists != null)
                         throw new Exception("Erreur : Cet email est déjà utilisé.");
+                }
+
+                // Un seul AdminGenerale autorisé lors du changement de rôle
+                if (fieldsToUpdate.Contains("Role") && entity.Role == "AdminGenerale" && existing.Role != "AdminGenerale")
+                {
+                    var adminsGenerale = await _unitOfWork.Repository<Utilisateur>().GetAllAsyncwithfilter(u => u.Role == "AdminGenerale");
+                    if (adminsGenerale.Any())
+                        throw new Exception("Erreur : Un AdminGenerale existe déjà. Un seul AdminGenerale est autorisé.");
                 }
 
                 await _unitOfWork.Repository<Utilisateur>().UpdateGeneral(existing, entity, fieldsToUpdate);

@@ -32,7 +32,7 @@ namespace Domain.Entities
         public string Password { get; set; } = string.Empty;
 
         [Column("Role")]
-        public string Role { get; set; } = "Admin";
+        public string Role { get; set; } = "Admin"; // "Admin" ou "AdminGenerale"
 
         [Column("IsActive")]
         public bool IsActive { get; set; } = true;
